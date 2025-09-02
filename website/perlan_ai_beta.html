@@ -84,7 +84,7 @@
     <div class="flex flex-1 overflow-hidden">
       <aside class="flex w-80 flex-col gap-4 border-r border-gray-200 bg-white p-4">
         <div class="panel flex-1 flex-col">
-          <h3 class="panel-header">Saga</h3>
+          <h3 class="panel-header">Mitt efni</h3>
           <ul class="divide-y divide-gray-200 p-2">
             <li class="flex cursor-pointer items-center gap-3 rounded-md bg-gray-100 p-2">
               <svg class="h-6 w-6 text-[var(--accent-color)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -234,22 +234,167 @@
   </div>
 
   <script>
-    // Toolbar buttons functionality
+    // Demo content for all grades and subjects
+    const demoContent = {
+      'Náttúrufræði': {
+        '10': [
+          { title: 'Líffræði: Frumur og vefir', type: 'Verkefni', content: 'Rannsakaðu uppbyggingu fruma og mismunandi vefja í mannslíkamanum.' },
+          { title: 'Efnafræði: Sýru-base jafnvægi', type: 'Verkefnablað', content: 'Lærum um pH-gildi og hvernig sýrur og basar haga sér í lausnum.' },
+          { title: 'Eðlisfræði: Rafsegulfræði', type: 'Kynning', content: 'Kynntu þér grundvallaratriði rafsegulfræði og notkun hennar.' }
+        ],
+        '9': [
+          { title: 'Mannslíkaminn: Blóðrásarkerfið', type: 'Verkefni', content: 'Lærðu um hjarta, æðar og blóðflæði í mannslíkamanum.' },
+          { title: 'Plöntur: Ljóstillífun', type: 'Verkefnablað', content: 'Rannsakaðu hvernig plöntur breyta ljósi í orku.' },
+          { title: 'Veðurfar og loftslag', type: 'Próf', content: 'Prófaðu þekkingu þína á veðurfari og loftslagsbreytingum.' }
+        ],
+        '8': [
+          { title: 'Dýr í náttúrunni', type: 'Verkefni', content: 'Rannsakaðu mismunandi dýrategundir og lífsskilyrði þeirra.' },
+          { title: 'Jarðfræði: Bergtegundir', type: 'Verkefnablað', content: 'Lærðu um mismunandi bergtegundir og myndun þeirra.' }
+        ]
+      },
+      'Stærðfræði': {
+        '10': [
+          { title: 'Algebra: Annars stigs jöfnur', type: 'Verkefni', content: 'Leysðu annars stigs jöfnur með mismunandi aðferðum.' },
+          { title: 'Rúmfræði: Þríhyrningar', type: 'Verkefnablað', content: 'Reiknað flatarmál og ummál þríhyrninga.' },
+          { title: 'Tölfræði og líkindi', type: 'Próf', content: 'Prófaðu þekkingu þína á tölfræði og líkindareikning.' }
+        ],
+        '9': [
+          { title: 'Línuleg föll', type: 'Verkefni', content: 'Lærðu um línuleg föll og graf þeirra.' },
+          { title: 'Prósentur og vextir', type: 'Verkefnablað', content: 'Reiknaðu prósentur og samsetta vexti.' }
+        ],
+        '8': [
+          { title: 'Brot og aukastafir', type: 'Verkefni', content: 'Æfðu þig í reikningum með brotum og aukastöfum.' },
+          { title: 'Flatarmál og ummál', type: 'Verkefnablað', content: 'Reiknaðu flatarmál og ummál grunnforma.' }
+        ]
+      },
+      'Saga': {
+        '10': [
+          { title: 'Heimsstyrjöldin fyrri', type: 'Verkefni', content: 'Rannsakaðu orsakir og afleiðingar fyrri heimsstyrjaldarinnar.' },
+          { title: 'Íslandssaga: Sjálfstæðisbarátta', type: 'Kynning', content: 'Kynntu þér baráttu Íslendinga fyrir sjálfstæði.' }
+        ],
+        '9': [
+          { title: 'Miðaldir í Evrópu', type: 'Verkefni', content: 'Lærðu um samfélag og menningu miðalda.' },
+          { title: 'Víkingaöld', type: 'Verkefnablað', content: 'Rannsakaðu víkingaferðir og áhrif þeirra.' }
+        ],
+        '8': [
+          { title: 'Landnám Íslands', type: 'Verkefni', content: 'Lærðu um fyrstu landnámsmenn og byggð Íslands.' },
+          { title: 'Fornaldarkonungar', type: 'Kynning', content: 'Kynntu þér sögu fornaldarkonunga Noregs.' }
+        ]
+      },
+      'Íslenska': {
+        '10': [
+          { title: 'Ljóðagreining: Nútímaljóð', type: 'Verkefni', content: 'Greindu nútímaljóð og túlkaðu þau.' },
+          { title: 'Ritgerðarskrif', type: 'Verkefnablað', content: 'Lærðu að skrifa vel uppbyggða ritgerð.' }
+        ],
+        '9': [
+          { title: 'Málfræði: Fallbeyging', type: 'Verkefni', content: 'Æfðu þig í fallbeygingu nafnorða og lýsingarorða.' },
+          { title: 'Bókmenntir: Íslendingasögur', type: 'Verkefnablað', content: 'Lestu og greindu íslendingasögur.' }
+        ],
+        '8': [
+          { title: 'Stafsetning og málfar', type: 'Verkefni', content: 'Bættu stafsetning og málfar með æfingum.' },
+          { title: 'Frásagnarlist', type: 'Verkefnablað', content: 'Lærðu að segja góðar sögur.' }
+        ]
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
-      // Refresh button (first icon button)
+      const gradeSelect = document.getElementById('class-grade-header');
+      const subjectSelect = document.getElementById('subject-header');
+      const sidebarList = document.querySelector('aside ul');
+      const contentArea = document.querySelector('[contenteditable="true"]');
+
+      // Function to update sidebar based on selected grade and subject
+      function updateSidebar() {
+        const selectedGrade = gradeSelect.value.replace('. bekkur', '');
+        const selectedSubject = subjectSelect.value;
+        
+        const materials = demoContent[selectedSubject]?.[selectedGrade] || [];
+        
+        sidebarList.innerHTML = materials.map((material, index) => `
+          <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50 ${index === 0 ? 'bg-gray-100' : ''}" data-material='${JSON.stringify(material)}'>
+            <svg class="h-6 w-6 ${index === 0 ? 'text-[var(--accent-color)]' : 'text-gray-400'}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <div>
+              <p class="font-medium text-sm ${index === 0 ? 'text-gray-800' : ''}">${material.title}</p>
+              <p class="text-xs text-gray-500">${selectedSubject}, ${gradeSelect.value}, ${material.type}</p>
+            </div>
+          </li>
+        `).join('');
+
+        // Load first material content
+        if (materials.length > 0) {
+          loadMaterialContent(materials[0], selectedSubject, gradeSelect.value);
+        }
+
+        // Add click handlers to new items
+        addSidebarClickHandlers();
+      }
+
+      // Function to load material content
+      function loadMaterialContent(material, subject, grade) {
+        contentArea.innerHTML = `
+          <h2 class="mb-4 text-3xl font-bold">${material.title}</h2>
+          <p class="mb-6 text-gray-500">${grade} - ${subject}</p>
+          <h3 class="mt-6 mb-2 text-xl font-semibold">Verkefnislýsing</h3>
+          <p class="mb-4 text-gray-700 leading-relaxed">${material.content}</p>
+          <h3 class="mt-6 mb-2 text-xl font-semibold">Leiðbeiningar</h3>
+          <p class="mb-4 text-gray-700 leading-relaxed">Nákvæmar leiðbeiningar fyrir þetta verkefni koma hér. Þetta er dæmi um efni sem væri búið til fyrir ${subject} í ${grade}.</p>
+          <h3 class="mt-6 mb-2 text-xl font-semibold">Markmið</h3>
+          <ul class="list-disc list-inside mb-4 pl-4 text-gray-700 space-y-2">
+            <li>Nemandi skilur grundvallaratriði efnisins</li>
+            <li>Nemandi getur beitt þekkingu sinni í verklegum dæmum</li>
+            <li>Nemandi þróar gagnrýna hugsun um efnið</li>
+          </ul>
+        `;
+      }
+
+      // Function to add click handlers to sidebar items
+      function addSidebarClickHandlers() {
+        const sidebarItems = document.querySelectorAll('aside li');
+        sidebarItems.forEach(item => {
+          item.addEventListener('click', function() {
+            // Remove active state from all items
+            sidebarItems.forEach(i => {
+              i.classList.remove('bg-gray-100');
+              i.querySelector('svg').classList.remove('text-[var(--accent-color)]');
+              i.querySelector('svg').classList.add('text-gray-400');
+              i.querySelector('p').classList.remove('text-gray-800');
+            });
+            
+            // Add active state to clicked item
+            this.classList.add('bg-gray-100');
+            this.querySelector('svg').classList.add('text-[var(--accent-color)]');
+            this.querySelector('svg').classList.remove('text-gray-400');
+            this.querySelector('p').classList.add('text-gray-800');
+            
+            // Load content based on clicked item
+            const materialData = JSON.parse(this.getAttribute('data-material'));
+            const selectedSubject = subjectSelect.value;
+            const selectedGrade = gradeSelect.value;
+            loadMaterialContent(materialData, selectedSubject, selectedGrade);
+          });
+        });
+      }
+
+      // Update sidebar when dropdowns change
+      gradeSelect.addEventListener('change', updateSidebar);
+      subjectSelect.addEventListener('change', updateSidebar);
+
+      // Initialize with default values
+      updateSidebar();
+
+      // Toolbar buttons functionality
       const refreshBtn = document.querySelector('.icon-button:nth-child(1)');
       refreshBtn.addEventListener('click', function() {
         location.reload();
       });
 
-      // Edit button (second icon button) 
       const editBtn = document.querySelector('.icon-button:nth-child(2)');
-      const contentArea = document.querySelector('[contenteditable="true"]');
       editBtn.addEventListener('click', function() {
         contentArea.focus();
       });
 
-      // Download button (third icon button)
       const downloadBtn = document.querySelector('.icon-button:nth-child(3)');
       downloadBtn.addEventListener('click', function() {
         const content = contentArea.innerHTML;
@@ -273,35 +418,24 @@
           return;
         }
         
-        // Simple demo functionality - replace content
+        const selectedSubject = subjectSelect.value;
+        const selectedGrade = gradeSelect.value;
+        
         contentArea.innerHTML = `
           <h2 class="mb-4 text-3xl font-bold">Nýtt verkefni: ${prompt}</h2>
-          <p class="mb-6 text-gray-500">Búið til með Perlan AI</p>
+          <p class="mb-6 text-gray-500">${selectedGrade} - ${selectedSubject}</p>
           <h3 class="mt-6 mb-2 text-xl font-semibold">Verkefnislýsing</h3>
-          <p class="mb-4 text-gray-700 leading-relaxed">Þetta er dæmi um verkefni sem var búið til út frá fyrirmælunum: "${prompt}"</p>
+          <p class="mb-4 text-gray-700 leading-relaxed">Þetta verkefni var búið til út frá fyrirmælunum: "${prompt}" fyrir ${selectedSubject} í ${selectedGrade}.</p>
           <h3 class="mt-6 mb-2 text-xl font-semibold">Leiðbeiningar</h3>
-          <p class="mb-4 text-gray-700 leading-relaxed">Hér koma nákvæmar leiðbeiningar fyrir verkefnið...</p>
+          <p class="mb-4 text-gray-700 leading-relaxed">Hér koma nákvæmar leiðbeiningar fyrir verkefnið sem var búið til með gervigreind.</p>
+          <h3 class="mt-6 mb-2 text-xl font-semibold">Markmið</h3>
+          <ul class="list-disc list-inside mb-4 pl-4 text-gray-700 space-y-2">
+            <li>Nemandi nær settum markmiðum fyrir ${selectedSubject}</li>
+            <li>Verkefnið er aðlagað ${selectedGrade}</li>
+            <li>Efnið er í samræmi við námskrá</li>
+          </ul>
         `;
         textarea.value = '';
-      });
-
-      // Sidebar item clicks
-      const sidebarItems = document.querySelectorAll('aside li');
-      sidebarItems.forEach(item => {
-        item.addEventListener('click', function() {
-          // Remove active state from all items
-          sidebarItems.forEach(i => i.classList.remove('bg-gray-100'));
-          // Add active state to clicked item
-          this.classList.add('bg-gray-100');
-          
-          // Load content based on clicked item
-          const title = this.querySelector('p').textContent;
-          contentArea.innerHTML = `
-            <h2 class="mb-4 text-3xl font-bold">${title}</h2>
-            <p class="mb-6 text-gray-500">Hlaðið úr sögu</p>
-            <p class="mb-4 text-gray-700 leading-relaxed">Efni fyrir "${title}" verður hlaðið hér...</p>
-          `;
-        });
       });
     });
   </script>
