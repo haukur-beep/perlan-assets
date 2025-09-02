@@ -226,6 +226,79 @@
     </div>
   </div>
 
+  <script>
+    // Toolbar buttons functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Refresh button (first icon button)
+      const refreshBtn = document.querySelector('.icon-button:nth-child(1)');
+      refreshBtn.addEventListener('click', function() {
+        location.reload();
+      });
+
+      // Edit button (second icon button) 
+      const editBtn = document.querySelector('.icon-button:nth-child(2)');
+      const contentArea = document.querySelector('[contenteditable="true"]');
+      editBtn.addEventListener('click', function() {
+        contentArea.focus();
+      });
+
+      // Download button (third icon button)
+      const downloadBtn = document.querySelector('.icon-button:nth-child(3)');
+      downloadBtn.addEventListener('click', function() {
+        const content = contentArea.innerHTML;
+        const blob = new Blob([content], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verkefni.html';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      // Generate button functionality
+      const generateBtn = document.querySelector('.action-button.primary-button');
+      const textarea = document.querySelector('textarea');
+      
+      generateBtn.addEventListener('click', function() {
+        const prompt = textarea.value.trim();
+        if (!prompt) {
+          alert('Vinsamlegast skrifaðu fyrirmæli áður en þú smellir á "Búa til"');
+          return;
+        }
+        
+        // Simple demo functionality - replace content
+        contentArea.innerHTML = `
+          <h2 class="mb-4 text-3xl font-bold">Nýtt verkefni: ${prompt}</h2>
+          <p class="mb-6 text-gray-500">Búið til með Perlan AI</p>
+          <h3 class="mt-6 mb-2 text-xl font-semibold">Verkefnislýsing</h3>
+          <p class="mb-4 text-gray-700 leading-relaxed">Þetta er dæmi um verkefni sem var búið til út frá fyrirmælunum: "${prompt}"</p>
+          <h3 class="mt-6 mb-2 text-xl font-semibold">Leiðbeiningar</h3>
+          <p class="mb-4 text-gray-700 leading-relaxed">Hér koma nákvæmar leiðbeiningar fyrir verkefnið...</p>
+        `;
+        textarea.value = '';
+      });
+
+      // Sidebar item clicks
+      const sidebarItems = document.querySelectorAll('aside li');
+      sidebarItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // Remove active state from all items
+          sidebarItems.forEach(i => i.classList.remove('bg-gray-100'));
+          // Add active state to clicked item
+          this.classList.add('bg-gray-100');
+          
+          // Load content based on clicked item
+          const title = this.querySelector('p').textContent;
+          contentArea.innerHTML = `
+            <h2 class="mb-4 text-3xl font-bold">${title}</h2>
+            <p class="mb-6 text-gray-500">Hlaðið úr sögu</p>
+            <p class="mb-4 text-gray-700 leading-relaxed">Efni fyrir "${title}" verður hlaðið hér...</p>
+          `;
+        });
+      });
+    });
+  </script>
+
 </body>
 
 </html>
