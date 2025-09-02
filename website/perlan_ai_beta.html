@@ -17,41 +17,57 @@
   <style type="text/tailwindcss">
     :root {
       --accent-color: #007aff;
+      --accent-hover: #0056cc;
+      --gradient-start: #667eea;
+      --gradient-end: #764ba2;
     }
     body {
-      font-family: "UnitOT", Arial, sans-serif;
-      background-color: #f5f5f7;
+      font-family: "UnitOT", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+    .glass-effect {
+      @apply bg-white/70 backdrop-blur-xl border border-white/20;
     }
     .top-bar-select {
-      @apply w-48 appearance-none rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 shadow-sm focus:border-[var(--accent-color)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-color)];
+      @apply w-48 appearance-none rounded-lg border border-gray-300/50 bg-white/80 backdrop-blur-sm px-4 py-2.5 text-sm text-gray-700 shadow-lg transition-all duration-200 focus:border-[var(--accent-color)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)]/20 focus:shadow-xl hover:shadow-md;
     }
     .action-button {
-      @apply flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors;
+      @apply flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
     }
     .primary-button {
-      @apply bg-[var(--accent-color)] text-white hover:bg-blue-600;
+      @apply bg-gradient-to-r from-[var(--accent-color)] to-[var(--accent-hover)] text-white hover:from-[var(--accent-hover)] hover:to-[var(--accent-color)] shadow-[var(--accent-color)]/25;
     }
     .secondary-button {
-      @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+      @apply bg-white/80 text-gray-800 hover:bg-white backdrop-blur-sm border border-gray-200/50;
     }
     .icon-button {
-      @apply rounded-md p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-800;
+      @apply rounded-lg p-2.5 text-gray-500 hover:bg-white/50 hover:text-gray-800 transition-all duration-200 backdrop-blur-sm;
     }
     .panel {
-      @apply rounded-xl border border-gray-200 bg-white shadow-sm;
+      @apply rounded-2xl border border-white/30 bg-white/80 backdrop-blur-xl shadow-2xl shadow-gray-500/10;
     }
     .panel-header {
-      @apply border-b border-gray-200 px-4 py-2 text-xs font-semibold uppercase text-gray-500;
+      @apply border-b border-gray-200/50 px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-600 bg-gradient-to-r from-gray-50/50 to-white/50;
+    }
+    .sidebar-item {
+      @apply flex cursor-pointer items-center gap-4 rounded-xl p-4 transition-all duration-200 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-indigo-50/50 hover:shadow-md hover:transform hover:scale-[1.02];
+    }
+    .sidebar-item.active {
+      @apply bg-gradient-to-r from-blue-100/70 to-indigo-100/70 shadow-lg border border-blue-200/50;
+    }
+    .content-area {
+      @apply h-full w-full focus:outline-none prose prose-lg max-w-none prose-headings:text-gray-800 prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700;
     }
   </style>
 </head>
 
 <body class="text-gray-900">
   <div class="flex h-screen w-full flex-col bg-gray-100">
-    <header class="flex h-16 shrink-0 items-center justify-between border-b border-gray-200 bg-white/80 px-6 backdrop-blur-md">
+    <header class="flex h-20 shrink-0 items-center justify-between border-b border-white/30 glass-effect px-8 shadow-lg">
       <div class="flex items-center gap-4">
-        <img src="https://raw.githubusercontent.com/haukur-beep/perlan-assets/main/images/Perlan_logo_black.png" alt="Perlan Logo" class="h-8 w-8 object-contain" />
-        <h1 class="text-xl font-semibold">Perlan AI</h1>
+        <img src="https://raw.githubusercontent.com/haukur-beep/perlan-assets/main/images/Perlan_logo_black.png" alt="Perlan Logo" class="h-10 w-10 object-contain" />
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-[var(--accent-color)] to-[var(--accent-hover)] bg-clip-text text-transparent">Perlan AI</h1>
         <div class="ml-6 flex items-center gap-4">
           <div class="relative">
             <select class="top-bar-select" id="class-grade-header" name="class-grade-header">
@@ -82,7 +98,7 @@
       </div>
     </header>
     <div class="flex flex-1 overflow-hidden">
-      <aside class="flex w-80 flex-col gap-4 border-r border-gray-200 bg-white p-4">
+      <aside class="flex w-80 flex-col gap-6 border-r border-white/30 glass-effect p-6">
         <div class="panel flex-1 flex-col">
           <h3 class="panel-header">Mitt efni</h3>
           <ul class="divide-y divide-gray-200 p-2">
@@ -122,10 +138,10 @@
           </ul>
         </div>
       </aside>
-      <main class="flex flex-1 flex-col p-6">
+      <main class="flex flex-1 flex-col p-8">
         <div class="flex-1 overflow-y-auto">
           <div class="panel flex h-full flex-col">
-            <div class="flex items-center justify-end gap-2 border-b border-gray-200 p-2">
+            <div class="flex items-center justify-end gap-3 border-b border-gray-200/50 p-4 bg-gradient-to-r from-gray-50/30 to-white/30">
               <button class="icon-button">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 4v5h5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -143,8 +159,8 @@
                 </svg>
               </button>
             </div>
-            <div class="flex-1 overflow-y-auto bg-white p-6" style="font-family: 'UnitOT', sans-serif;">
-              <div class="h-full w-full focus:outline-none" contenteditable="true">
+            <div class="flex-1 overflow-y-auto bg-gradient-to-br from-white/90 to-gray-50/90 p-8" style="font-family: 'UnitOT', sans-serif;">
+              <div class="content-area" contenteditable="true">
                 <h2 class="mb-4 text-3xl font-bold">Verkefni: Íslensk náttúra</h2>
                 <p class="mb-6 text-gray-500">10. bekkur - Náttúrufræði</p>
                 <h3 class="mt-6 mb-2 text-xl font-semibold">Inngangur</h3>
@@ -175,8 +191,8 @@
             </div>
           </div>
         </div>
-        <div class="mt-6">
-          <div class="mb-3 flex items-center gap-4">
+        <div class="mt-8">
+          <div class="mb-4 flex items-center gap-4">
             <div class="relative">
               <select class="top-bar-select" id="output-type" name="output-type">
                 <option>Verkefni</option>
@@ -202,8 +218,8 @@
               </select>
             </div>
           </div>
-          <div class="panel flex items-center gap-3 p-3">
-            <textarea class="w-full flex-1 resize-none border-0 bg-transparent p-2 text-base placeholder-gray-500 focus:ring-0" placeholder="Skrifaðu inn fyrirmæli hér... til dæmis: 'Búðu til verkefni um íslenska náttúru fyrir 10. bekk.'"></textarea>
+          <div class="panel flex items-center gap-4 p-4">
+            <textarea class="w-full flex-1 resize-none border-0 bg-transparent p-4 text-base placeholder-gray-400 focus:ring-0 rounded-lg" placeholder="Skrifaðu inn fyrirmæli hér... til dæmis: 'Búðu til verkefni um íslenska náttúru fyrir 10. bekk.'" rows="3"></textarea>
             <button class="action-button primary-button">
               <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
@@ -357,26 +373,26 @@
         
         // Update main content sidebar
         sidebarList.innerHTML = materials.map((material, index) => `
-          <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50 ${index === 0 ? 'bg-gray-100' : ''}" data-material='${JSON.stringify(material)}'>
+          <li class="sidebar-item ${index === 0 ? 'active' : ''}" data-material='${JSON.stringify(material)}'>
             <svg class="h-6 w-6 ${index === 0 ? 'text-[var(--accent-color)]' : 'text-gray-400'}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <div>
-              <p class="font-medium text-sm ${index === 0 ? 'text-gray-800' : ''}">${material.title}</p>
-              <p class="text-xs text-gray-500">${selectedSubject}, ${gradeSelect.value}, ${material.type}</p>
+            <div class="flex-1">
+              <p class="font-semibold text-sm ${index === 0 ? 'text-gray-800' : 'text-gray-700'}">${material.title}</p>
+              <p class="text-xs text-gray-500 mt-1">${selectedSubject}, ${gradeSelect.value}, ${material.type}</p>
             </div>
           </li>
         `).join('');
 
         // Update shared content sidebar
         sharedList.innerHTML = sharedMaterials.map((material, index) => `
-          <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50" data-material='${JSON.stringify(material)}'>
-            <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+          <li class="sidebar-item" data-material='${JSON.stringify(material)}'>
+            <svg class="h-6 w-6 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <div>
-              <p class="font-medium text-sm">${material.title}</p>
-              <p class="text-xs text-gray-500">${selectedSubject}, ${gradeSelect.value}, ${material.type}</p>
+            <div class="flex-1">
+              <p class="font-semibold text-sm text-gray-700">${material.title}</p>
+              <p class="text-xs text-gray-500 mt-1">${selectedSubject}, ${gradeSelect.value}, ${material.type}</p>
             </div>
           </li>
         `).join('');
@@ -415,16 +431,20 @@
           item.addEventListener('click', function() {
             // Remove active state from all items
             allSidebarItems.forEach(i => {
-              i.classList.remove('bg-gray-100');
-              i.querySelector('svg').classList.remove('text-[var(--accent-color)]');
+              i.classList.remove('active');
+              i.querySelector('svg').classList.remove('text-[var(--accent-color)]', 'text-purple-400');
               i.querySelector('svg').classList.add('text-gray-400');
               i.querySelector('p').classList.remove('text-gray-800');
+              i.querySelector('p').classList.add('text-gray-700');
             });
             
             // Add active state to clicked item
-            this.classList.add('bg-gray-100');
-            this.querySelector('svg').classList.add('text-[var(--accent-color)]');
-            this.querySelector('svg').classList.remove('text-gray-400');
+            this.classList.add('active');
+            const svg = this.querySelector('svg');
+            const isShared = this.closest('#shared-content');
+            svg.classList.remove('text-gray-400');
+            svg.classList.add(isShared ? 'text-purple-400' : 'text-[var(--accent-color)]');
+            this.querySelector('p').classList.remove('text-gray-700');
             this.querySelector('p').classList.add('text-gray-800');
             
             // Load content based on clicked item
