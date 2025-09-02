@@ -117,25 +117,8 @@
         </div>
         <div class="panel flex-1 flex-col">
           <h3 class="panel-header">Sameiginlegt svæði</h3>
-          <ul class="divide-y divide-gray-200 p-2">
-            <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50">
-              <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-              <div>
-                <p class="font-medium text-sm">Algebra Próf</p>
-                <p class="text-xs text-gray-500">Stærðfræði, 9. bekkur, Próf</p>
-              </div>
-            </li>
-            <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50">
-              <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-              <div>
-                <p class="font-medium text-sm">Ljóðagreining</p>
-                <p class="text-xs text-gray-500">Íslenska, 10. bekkur, Verkefnablað</p>
-              </div>
-            </li>
+          <ul class="divide-y divide-gray-200 p-2" id="shared-content">
+            <!-- Dynamic shared content will be populated here -->
           </ul>
         </div>
       </aside>
@@ -297,10 +280,71 @@
       }
     };
 
+    // Shared content for all grades and subjects
+    const sharedContent = {
+      'Náttúrufræði': {
+        '10': [
+          { title: 'Rannsóknir í náttúrufræði', type: 'Sameiginlegt verkefni', content: 'Sameiginlegt rannsóknarverkefni fyrir alla nemendur í 10. bekk.' },
+          { title: 'Náttúrufræði próf - fyrri hluti', type: 'Próf', content: 'Sameiginlegt próf fyrir öll náttúrufræðiefni fyrri hluta.' }
+        ],
+        '9': [
+          { title: 'Vísindaverkefni: Tilraunir', type: 'Sameiginlegt verkefni', content: 'Sameiginlegar tilraunir fyrir alla 9. bekk.' },
+          { title: 'Náttúrufræði keppni', type: 'Keppni', content: 'Sameiginleg náttúrufræðikeppni fyrir bekkinn.' }
+        ],
+        '8': [
+          { title: 'Umhverfisverkefni', type: 'Sameiginlegt verkefni', content: 'Sameiginlegt verkefni um umhverfisvernd.' },
+          { title: 'Náttúruskoðun', type: 'Vettvangsferð', content: 'Sameiginleg náttúruskoðun fyrir bekkinn.' }
+        ]
+      },
+      'Stærðfræði': {
+        '10': [
+          { title: 'Stærðfræði olympíada', type: 'Keppni', content: 'Sameiginleg stærðfræðikeppni fyrir 10. bekk.' },
+          { title: 'Reiknirit og forritun', type: 'Sameiginlegt verkefni', content: 'Sameiginlegt verkefni um reiknirit.' }
+        ],
+        '9': [
+          { title: 'Stærðfræðiverkefni hópa', type: 'Hópverkefni', content: 'Sameiginlegt hópverkefni í stærðfræði.' },
+          { title: 'Algebra keppni', type: 'Keppni', content: 'Sameiginleg algebra keppni fyrir bekkinn.' }
+        ],
+        '8': [
+          { title: 'Rúmfræði verkefni', type: 'Sameiginlegt verkefni', content: 'Sameiginlegt verkefni um rúmfræði.' },
+          { title: 'Stærðfræði leikir', type: 'Leikur', content: 'Sameiginlegir stærðfræðileikir fyrir bekkinn.' }
+        ]
+      },
+      'Saga': {
+        '10': [
+          { title: 'Sögurannsókn: Íslandssaga', type: 'Rannsóknarverkefni', content: 'Sameiginleg rannsókn á íslandssögu.' },
+          { title: 'Heimsósaga verkefni', type: 'Sameiginlegt verkefni', content: 'Sameiginlegt verkefni um heimssögu.' }
+        ],
+        '9': [
+          { title: 'Miðaldaverkefni', type: 'Hópverkefni', content: 'Sameiginlegt verkefni um miðaldir.' },
+          { title: 'Víkingaöld kynning', type: 'Sameiginleg kynning', content: 'Sameiginleg kynning um víkingaöld.' }
+        ],
+        '8': [
+          { title: 'Landnámsverkefni', type: 'Sameiginlegt verkefni', content: 'Sameiginlegt verkefni um landnám Íslands.' },
+          { title: 'Fornaldarkonungar', type: 'Sameiginleg kynning', content: 'Sameiginleg kynning um fornaldarkonunga.' }
+        ]
+      },
+      'Íslenska': {
+        '10': [
+          { title: 'Ljóðakeppni bekkjarins', type: 'Keppni', content: 'Sameiginleg ljóðakeppni fyrir allan bekkinn.' },
+          { title: 'Ritgerðaskrif: Sameiginlegt efni', type: 'Sameiginlegt verkefni', content: 'Sameiginlegt verkefni í ritgerðarskrifi.' }
+        ],
+        '9': [
+          { title: 'Bókmenntaverkefni', type: 'Hópverkefni', content: 'Sameiginlegt bókmenntaverkefni fyrir bekkinn.' },
+          { title: 'Málfræði keppni', type: 'Keppni', content: 'Sameiginleg málfræðikeppni.' }
+        ],
+        '8': [
+          { title: 'Frásagnarverkefni', type: 'Sameiginlegt verkefni', content: 'Sameiginlegt verkefni í frásagnarlist.' },
+          { title: 'Stafsetningarkeppni', type: 'Keppni', content: 'Sameiginleg stafsetningarkeppni.' }
+        ]
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
       const gradeSelect = document.getElementById('class-grade-header');
       const subjectSelect = document.getElementById('subject-header');
       const sidebarList = document.querySelector('aside ul');
+      const sharedList = document.getElementById('shared-content');
       const contentArea = document.querySelector('[contenteditable="true"]');
 
       // Function to update sidebar based on selected grade and subject
@@ -309,7 +353,9 @@
         const selectedSubject = subjectSelect.value;
         
         const materials = demoContent[selectedSubject]?.[selectedGrade] || [];
+        const sharedMaterials = sharedContent[selectedSubject]?.[selectedGrade] || [];
         
+        // Update main content sidebar
         sidebarList.innerHTML = materials.map((material, index) => `
           <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50 ${index === 0 ? 'bg-gray-100' : ''}" data-material='${JSON.stringify(material)}'>
             <svg class="h-6 w-6 ${index === 0 ? 'text-[var(--accent-color)]' : 'text-gray-400'}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -317,6 +363,19 @@
             </svg>
             <div>
               <p class="font-medium text-sm ${index === 0 ? 'text-gray-800' : ''}">${material.title}</p>
+              <p class="text-xs text-gray-500">${selectedSubject}, ${gradeSelect.value}, ${material.type}</p>
+            </div>
+          </li>
+        `).join('');
+
+        // Update shared content sidebar
+        sharedList.innerHTML = sharedMaterials.map((material, index) => `
+          <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50" data-material='${JSON.stringify(material)}'>
+            <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <div>
+              <p class="font-medium text-sm">${material.title}</p>
               <p class="text-xs text-gray-500">${selectedSubject}, ${gradeSelect.value}, ${material.type}</p>
             </div>
           </li>
@@ -351,11 +410,11 @@
 
       // Function to add click handlers to sidebar items
       function addSidebarClickHandlers() {
-        const sidebarItems = document.querySelectorAll('aside li');
-        sidebarItems.forEach(item => {
+        const allSidebarItems = document.querySelectorAll('aside li');
+        allSidebarItems.forEach(item => {
           item.addEventListener('click', function() {
             // Remove active state from all items
-            sidebarItems.forEach(i => {
+            allSidebarItems.forEach(i => {
               i.classList.remove('bg-gray-100');
               i.querySelector('svg').classList.remove('text-[var(--accent-color)]');
               i.querySelector('svg').classList.add('text-gray-400');
