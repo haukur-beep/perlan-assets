@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Perlan AI</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style type="text/tailwindcss">
+    :root {
+      --accent-color: #007aff;
+    }
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background-color: #f5f5f7;
+    }
+    .top-bar-select {
+      @apply w-48 appearance-none rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 shadow-sm focus:border-[var(--accent-color)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-color)];
+    }
+    .action-button {
+      @apply flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors;
+    }
+    .primary-button {
+      @apply bg-[var(--accent-color)] text-white hover:bg-blue-600;
+    }
+    .secondary-button {
+      @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+    }
+    .icon-button {
+      @apply rounded-md p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-800;
+    }
+    .panel {
+      @apply rounded-xl border border-gray-200 bg-white shadow-sm;
+    }
+    .panel-header {
+      @apply border-b border-gray-200 px-4 py-2 text-xs font-semibold uppercase text-gray-500;
+    }
+  </style>
+</head>
+
+<body class="text-gray-900">
+  <div class="flex h-screen w-full flex-col bg-gray-100">
+    <header class="flex h-16 shrink-0 items-center justify-between border-b border-gray-200 bg-white/80 px-6 backdrop-blur-md">
+      <div class="flex items-center gap-4">
+        <svg class="h-8 w-8 text-[var(--accent-color)]" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          <path d="M2 7L12 12M22 7L12 12M12 22V12M17 4.5L7 9.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <h1 class="text-xl font-semibold">Perlan AI</h1>
+        <div class="ml-6 flex items-center gap-4">
+          <div class="relative">
+            <select class="top-bar-select" id="class-grade-header" name="class-grade-header">
+              <option>10. bekkur</option>
+              <option>9. bekkur</option>
+              <option>8. bekkur</option>
+            </select>
+          </div>
+          <div class="relative">
+            <select class="top-bar-select" id="subject-header" name="subject-header">
+              <option>Náttúrufræði</option>
+              <option>Stærðfræði</option>
+              <option>Saga</option>
+              <option selected="">Íslenska</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="h-9 w-9 rounded-full bg-cover bg-center" style='background-image: url("https://cdn-icons-png.freepik.com/512/7235/7235968.png");'></div>
+      </div>
+    </header>
+    <div class="flex flex-1 overflow-hidden">
+      <aside class="flex w-80 flex-col gap-4 border-r border-gray-200 bg-white p-4">
+        <div class="panel flex-1 flex-col">
+          <h3 class="panel-header">Saga</h3>
+          <ul class="divide-y divide-gray-200 p-2">
+            <li class="flex cursor-pointer items-center gap-3 rounded-md bg-gray-100 p-2">
+              <svg class="h-6 w-6 text-[var(--accent-color)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-sm text-gray-800">Íslensk náttúra</p>
+                <p class="text-xs text-gray-500">Íslenska, 10. bekkur, Verkefni</p>
+              </div>
+            </li>
+            <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50">
+              <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-sm">Fallbeyging Lýsingarorða</p>
+                <p class="text-xs text-gray-500">Íslenska, 10. bekkur, Verkefnablað</p>
+              </div>
+            </li>
+            <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50">
+              <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-sm">Íslandssaga: Landnám</p>
+                <p class="text-xs text-gray-500">Saga, 8. bekkur, Kynning</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="panel flex-1 flex-col">
+          <h3 class="panel-header">Sameiginlegt svæði</h3>
+          <ul class="divide-y divide-gray-200 p-2">
+            <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50">
+              <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-sm">Algebra Próf</p>
+                <p class="text-xs text-gray-500">Stærðfræði, 9. bekkur, Próf</p>
+              </div>
+            </li>
+            <li class="flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-gray-50">
+              <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <div>
+                <p class="font-medium text-sm">Ljóðagreining</p>
+                <p class="text-xs text-gray-500">Íslenska, 10. bekkur, Verkefnablað</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <main class="flex flex-1 flex-col p-6">
+        <div class="flex-1 overflow-y-auto">
+          <div class="panel flex h-full flex-col">
+            <div class="flex items-center justify-end gap-2 border-b border-gray-200 p-2">
+              <button class="icon-button">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 4v5h5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M20 12A8 8 0 1013.43 5.07" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+              <button class="icon-button">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+              <button class="icon-button">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="flex-1 overflow-y-auto bg-white p-6" style="font-family: 'Inter', sans-serif;">
+              <div class="h-full w-full focus:outline-none" contenteditable="true">
+                <h2 class="mb-4 text-3xl font-bold">Verkefni: Íslensk náttúra</h2>
+                <p class="mb-6 text-gray-500">10. bekkur - Íslenska</p>
+                <h3 class="mt-6 mb-2 text-xl font-semibold">Inngangur</h3>
+                <p class="mb-4 text-gray-700 leading-relaxed">Ísland er þekkt fyrir stórbrotna og einstaka náttúru. Frá jöklum og eldfjöllum til fossa og norðurljósa, landslagið er síbreytilegt og heillandi. Í þessu verkefni munuð þið kanna mismunandi þætti íslenskrar náttúru, sögu hennar og mikilvægi fyrir íslenska menningu.</p>
+                <h3 class="mt-6 mb-2 text-xl font-semibold">1. Hluti: Rannsókn</h3>
+                <p class="mb-4 text-gray-700 leading-relaxed">Veldu eitt af eftirfarandi náttúrufyrirbærum til að rannsaka:</p>
+                <ul class="list-disc list-inside mb-4 pl-4 text-gray-700 space-y-2">
+                  <li>Jöklar (t.d. Vatnajökull, Langjökull)</li>
+                  <li>Eldfjöll (t.d. Hekla, Katla, Eyjafjallajökull)</li>
+                  <li>Fossar (t.d. Gullfoss, Seljalandsfoss, Skógafoss)</li>
+                  <li>Jarðhitasvæði (t.d. Geysir, Bláa Lónið)</li>
+                  <li>Norðurljós</li>
+                </ul>
+                <p class="mb-4 text-gray-700 leading-relaxed">Safnaðu upplýsingum um:</p>
+                <ul class="list-disc list-inside mb-4 pl-4 text-gray-700 space-y-2">
+                  <li>Staðsetningu og myndun</li>
+                  <li>Sögulegt og menningarlegt mikilvægi</li>
+                  <li>Áhrif á umhverfi og samfélag</li>
+                  <li>Núverandi ástand og framtíðarhorfur</li>
+                </ul>
+                <h3 class="mt-6 mb-2 text-xl font-semibold">2. Hluti: Skriflegt verkefni</h3>
+                <p class="mb-4 text-gray-700 leading-relaxed">Skrifaðu 500-700 orða ritgerð um náttúrufyrirbærið sem þú valdir. Gættu að málfari, stafsetningu og heimildanotkun. Ritgerðin á að innihalda inngang, meginmál og lokaorð.</p>
+                <h3 class="mt-6 mb-2 text-xl font-semibold">3. Hluti: Kynning</h3>
+                <p class="mb-4 text-gray-700 leading-relaxed">Undirbúðu 5-7 mínútna kynningu fyrir bekkinn. Notaðu myndir eða myndbönd til að styðja við efnið. Vertu tilbúin/n að svara spurningum frá samnemendum.</p>
+                <h3 class="mt-6 mb-2 text-xl font-semibold">Skilafrestur</h3>
+                <p class="mb-4 text-gray-700 leading-relaxed">Verkefninu skal skilað eigi síðar en föstudaginn 25. október.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6">
+          <div class="mb-3 flex items-center gap-4">
+            <div class="relative">
+              <select class="top-bar-select" id="output-type" name="output-type">
+                <option>Verkefni</option>
+                <option>Verkefnablað</option>
+                <option>Spurningakeppni</option>
+                <option>Kynning</option>
+              </select>
+            </div>
+            <div class="relative">
+              <select class="top-bar-select" id="difficulty" name="difficulty">
+                <option>Erfiðleikastig</option>
+                <option>Auðvelt</option>
+                <option>Miðlungs</option>
+                <option>Erfitt</option>
+              </select>
+            </div>
+            <div class="relative">
+              <select class="top-bar-select" id="length" name="length">
+                <option>Lengd</option>
+                <option>Stutt</option>
+                <option>Miðlungs</option>
+                <option>Löng</option>
+              </select>
+            </div>
+          </div>
+          <div class="panel flex items-center gap-3 p-3">
+            <textarea class="w-full flex-1 resize-none border-0 bg-transparent p-2 text-base placeholder-gray-500 focus:ring-0" placeholder="Skrifaðu inn fyrirmæli hér... til dæmis: 'Búðu til verkefni um íslenska náttúru fyrir 10. bekk.'"></textarea>
+            <button class="action-button primary-button">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+              </svg>
+              <span>Búa til</span>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</body>
+
+</html>
